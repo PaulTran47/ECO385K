@@ -379,7 +379,7 @@ close(gcf);
 % in the equilibrium unemployment rate to decrease. However, as beta
 % increases, the magnitude of this decrease in the unemployment rate gets
 % smaller. This means the responsiveness of the unemployment rate with
-% respect to productivity decreases as beta increases.
+% respect to productivity changes in beta decreases.
 %==========================================================================
 %==========================================================================
 

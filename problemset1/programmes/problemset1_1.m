@@ -85,20 +85,20 @@ clear iteration error;
 % Calculating reservation wage using the Bellman equation
 w_bar = (1 - beta)*(beta*mean(v));
 
-% Creating matrix that pairs wages to corresponding Bellman equation. Sorts
-% by ascending order.
-w_v = [w v];
-w_v = sortrows(w_v, 1);
+% Creating policy function
+syms s(wage);
+s(wage) = piecewise(wage >= w_bar, 1, wage < w_bar, 0);
 
 % Plotting policy function
-plotmatrix(w_v(:, 1), w_v(:, 2));
+fplot(s(wage), [10, 60], 'LineWidth', 2);
 grid on
 xlabel('Wage');
-ylabel('Value');
+ylabel('Policy');
 hold on
 title('Policy function');
 
 saveas(gcf, 'path\to\graphics\1a_plot.png');
+close(gcf);
 %==========================================================================
 
 %==========================================================================
@@ -150,26 +150,45 @@ for b = 10:5:55
   % Calculating reservation wage using the Bellman equation
   w_bar = (1 - beta)*(beta*mean(v));
   
+  % Calculating value of reservation wage
+  v_bar = w_bar/(1 - beta);
+  
   % Storing w_bar and corresponding b in as a row in matrix
   w_bar_b(counter, :) = [w_bar b];
 
-  % Creating matrix that pairs wages to corresponding Bellman equation.
-  % Sorts by ascending order.
-  w_v = [w v];
-  w_v = sortrows(w_v, 1);
+  % Creating policy function
+  syms s(wage);
+  s(wage) = piecewise(wage >= w_bar, 1, wage < w_bar, 0);
 
   % Plotting policy function
-  plotmatrix(w_v(:, 1), w_v(:, 2));
+  fplot(s(wage), [50, 60], 'LineWidth', 1.25);
   grid on
   xlabel('Wage');
-  ylabel('Value');
+  ylabel('Policy');
   hold on
-  title(['Policy function, b = ' num2str(b)]);
+
+  % Creating legend
+  Legend = cell(2,1)
+  Legend{1}= 'b = 10';
+  Legend{2}= 'b = 15';
+  Legend{3}= 'b = 20';
+  Legend{4}= 'b = 25';
+  Legend{5}= 'b = 30';
+  Legend{6}= 'b = 35';
+  Legend{7}= 'b = 40';
+  Legend{8}= 'b = 45';
+  Legend{9}= 'b = 50';
+  Legend{10}= 'b = 55';
+  legend(Legend, 'Location', 'Northwest');
   
-  saveas(gcf, ['path\to\graphics\1b_b' num2str(b) 'plot.png']);
+  % Creating title
+  title('Policy function');
+  
+  saveas(gcf, 'path\to\graphics\1b_plot.png');
   
   counter = counter + 1;
 end
+close(gcf);
 %=========================================================
 % We can see that the reservation wage is increasing in b.
 %=========================================================
@@ -229,23 +248,33 @@ for beta = 0.960:0.013:0.999
   % Storing w_bar and corresponding beta in as a row in matrix
   w_bar_beta(counter, :) = [w_bar beta];
 
-  % Creating matrix that pairs wages to corresponding Bellman equation.
-  % Sorts by ascending order.
-  w_v = [w v];
-  w_v = sortrows(w_v, 1);
+  % Creating policy function
+  syms s(wage);
+  s(wage) = piecewise(wage >= w_bar, 1, wage < w_bar, 0);
 
   % Plotting policy function
-  plotmatrix(w_v(:, 1), w_v(:, 2));
+  fplot(s(wage), [40, 60], 'LineWidth', 1.25);
   grid on
   xlabel('Wage');
-  ylabel('Value');
+  ylabel('Policy');
   hold on
-  title(['Policy function, \beta = ' num2str(beta)]);
   
-  saveas(gcf, ['path\to\graphics\1c_beta' num2str(beta) 'plot.png']);
+  % Creating legend
+  Legend = cell(2,1)
+  Legend{1}= '\beta = 0.96';
+  Legend{2}= '\beta = 0.973';
+  Legend{3}= '\beta = 0.986';
+  Legend{4}= '\beta = 0.999';
+  legend(Legend, 'Location', 'Northwest');
+  
+  % Creating title
+  title('Policy function')
+  
+  saveas(gcf, 'path\to\graphics\1c_plot.png');
   
   counter = counter + 1;
 end
+close(gcf);
 %============================================================
 % We can see that the reservation wage is increasing in beta.
 %============================================================
@@ -299,21 +328,20 @@ clear iteration error;
 % natural log terms. Therefore, we need to convert it back to levels.
 w_bar = exp((1 - beta)*(beta*mean(v)));
 
-% Creating matrix that pairs wages to corresponding Bellman equation. Sorts
-% by ascending order.
-w_v = [w v];
-w_v = sortrows(w_v, 1);
+% Creating policy function
+syms s(wage);
+s(wage) = piecewise(wage >= w_bar, 1, wage < w_bar, 0);
 
 % Plotting policy function
-plotmatrix(w_v(:, 1), w_v(:, 2));
+fplot(s(wage), [10, 60], 'LineWidth', 2);
 grid on
 xlabel('Wage');
-ylabel('Value');
+ylabel('Policy');
 hold on
 title('Policy function, maximising utility ln(Y_t)');
 
 saveas(gcf, 'path\to\graphics\1d_plot.png');
-
+close(gcf);
 %========================================================================
 % When comparing with the reservation wage in part 1a, we see that the
 % reservation wage is smaller if the worker is maximising ln(Y_t) instead
@@ -396,20 +424,20 @@ clear iteration error;
 % natural log terms. Therefore, we need to convert it back to levels.
 w_bar = (1 - beta)*(beta*mean(v));
 
-% Creating matrix that pairs wages to corresponding Bellman equation. Sorts
-% by ascending order.
-w_v = [w v];
-w_v = sortrows(w_v, 1);
+% Creating policy function
+syms s(wage);
+s(wage) = piecewise(wage >= w_bar, 1, wage < w_bar, 0);
 
 % Plotting policy function
-plotmatrix(w_v(:, 1), w_v(:, 2));
+fplot(s(wage), [10, 60], 'LineWidth', 2);
 grid on
 xlabel('Wage');
-ylabel('Value');
+ylabel('Policy');
 hold on
-title('Policy Function, chance to not get job offer');
+title(['Policy Function, chance to receive job offer is ', '\phi = 0.7.']);
 
 saveas(gcf, 'path\to\graphics\1e_plot.png');
+close(gcf);
 %==========================================================================
 
 %==========================================================================
@@ -474,20 +502,20 @@ clear iteration error;
 % Calculating reservation wage using the Bellman equation
 w_bar = (1 - beta)*(beta*mean(v));
 
-% Creating matrix that pairs wages to corresponding Bellman equation. Sorts
-% by ascending order.
-w_v = [w v];
-w_v = sortrows(w_v, 1);
+% Creating policy function
+syms s(wage);
+s(wage) = piecewise(wage >= w_bar, 1, wage < w_bar, 0);
 
 % Plotting policy function
-plotmatrix(w_v(:, 1), w_v(:, 2));
+fplot(s(wage), [5, 65], 'LineWidth', 2);
 grid on
 xlabel('Wage');
-ylabel('Value');
+ylabel('Policy');
 hold on
 title('Policy function, [w_{min}, w_{max}] = [5, 65]');
 
 saveas(gcf, 'path\to\graphics\1f_plot.png');
+close(gcf);
 %==========================================================================
 
 %==========================================================================
@@ -552,18 +580,18 @@ clear iteration error;
 % Calculating reservation wage using the Bellman equation
 w_bar = (1 - beta)*(beta*mean(v));
 
-% Creating matrix that pairs wages to corresponding Bellman equation. Sorts
-% by ascending order.
-w_v = [w v];
-w_v = sortrows(w_v, 1);
+% Creating policy function
+syms s(wage);
+s(wage) = piecewise(wage >= w_bar, 1, wage < w_bar, 0);
 
 % Plotting policy function
-plotmatrix(w_v(:, 1), w_v(:, 2));
+fplot(s(wage), [15, 50], 'LineWidth', 2);
 grid on
 xlabel('Wage');
-ylabel('Value');
+ylabel('Policy');
 hold on
 title('Policy function, [w_{min}, w_{max}] = [15, 50]');
 
 saveas(gcf, 'path\to\graphics\1g_plot.png');
+close(gcf);
 %==========================================================================
