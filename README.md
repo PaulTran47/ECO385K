@@ -12,7 +12,7 @@ MIT Licensed.
 # Problem Set 1
 ============================================================================
 
-Basic McCall matching model Bellman equation iteration, investigating relationship between unemployment rate and average duration of unemployment, basic Mortensen-Pissarides matching model with exogenous separation.
+Basic McCall matching model Bellman equation iteration; investigating relationship between unemployment rate and average duration of unemployment; basic Mortensen-Pissarides matching model with exogenous separation.
 
 ============================================================================
 
