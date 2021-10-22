@@ -106,8 +106,7 @@ clear avgduru urate;
 %==========================================================================
 
 %==========================================================================
-%% Part 2a: Plot the unemployment rate and the average duration of
-% unemployment (update Figure 1)
+%% Part 2a: Plot the unemployment rate and the average duration of unemployment (update Figure 1)
 cd(home_dir);
 
 % Changing axes colours
@@ -240,15 +239,18 @@ avg_dur_u_f = [11.3; 14.4; 20.7; 22.8; 25.8; 25.8; 24.4];
 %==========================================================================
 
 %==========================================================================
-%% Part 2f: Apply demographic adjustment in Equation 4 and plot the actual
-% and adjusted series.
-%==========================================================================
+%% Part 2f: Apply demographic adjustment in Equation 4 and plot the actual and adjusted series.
+%=====
+% NOTE
+%=====
 % WE ARE CHOOSING TO UPDATE EXPERIMENT C.1 IN THE PAPER, WHICH IS EXAMINING
 % THE DEMOGRAPHIC CHANGE IN UNEMPLOYMENT DURATION. THIS MEANS HOLDING
 % AVG_DUR_U FOR SEX AND AGE GROUP CONSTANT, AND CHANGING FRACTION OF
 % UNEMPLOYED WORKERS WHO ARE IN A PARTICULAR SEX- AND AGE-GROUP.
 % Setting up data exclusive to 2f
-%==========================================================================
+%=========
+% END NOTE
+%=========
 cd(data_dir);
 
 %==================================================
@@ -375,8 +377,7 @@ fd = [fd_m fd_f];
 % demographic change, avg_dur_u_d
 avg_dur_u_d = sum(fd, 2);
 
-%% Plotting avg_dur_u_d (adjusted series) and avg_dur_u (actual series)
-% together
+%% Plotting avg_dur_u_d (adjusted series) and avg_dur_u (actual series) together
 plot(dt, avg_dur_u, 'LineWidth', 1.25, 'Color', [0,0,1]);
 hold on
 plot(dt, avg_dur_u_d, 'LineWidth', 1.25, 'Color', [1,0,0]);
@@ -395,8 +396,7 @@ title({'Average duration of unemployment', 'and adjusted average duration of une
 saveas(gcf, 'path\to\graphics\2fi_plot.png');
 close(gcf);
 
-%% Following the paper to see the effect of the adjustment more clearly, we
-% will subtract avg_dur_u_d from avg_dur_u_trend.
+%% Following the paper to see the effect of the adjustment more clearly, we will subtract avg_dur_u_d from avg_dur_u_trend.
 plot(dt, avg_dur_u_trend, 'LineWidth', 1.25, 'Color', [0,0,1]);
 hold on
 plot(dt, avg_dur_u_trend - avg_dur_u_d, 'LineWidth', 1.25, 'Color', [1,0,0]);

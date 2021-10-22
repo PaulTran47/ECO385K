@@ -62,7 +62,7 @@ p = unifpdf(w, w_min, w_max);
 %==========================================================================
 
 %==========================================================================
-%% Part 1a: Calculate the reservation wage and plot the policy funciton
+%% Part 1a: Calculate the reservation wage and plot the policy function
 % Setting up data exclusive to 1a.
 % Creating discount factor, beta
 beta = 0.995;
@@ -90,7 +90,6 @@ while error >= 0.001
   disp(iteration);
   
   % Calculating value function using initial or previous value function
-  % WHY DOES USING sum(v.*p) CAUSE THE LOOP TO EXPLODE???
   v_next = max(w./(1 - beta), b + beta*sum(v.*p));
   
   % Storing max(abs(v - v_next)). Choosing the max so the abs vector has
@@ -125,10 +124,7 @@ close(gcf);
 %==========================================================================
 
 %==========================================================================
-%% Part 1b: Vary b from 10 to 55, calculate the reservation wage and plot
-% function for different values of UI. Is the reservation wage increasing
-% or decreasing in b?
-
+%% Part 1b: Vary b from 10 to 55, calculate the reservation wage and plot function for different values of UI. Is the reservation wage increasing or decreasing in b?
 % Looping through value function iteration and policy function plotting
 % portion as done in part 1a, for various values of b.
 % Creating counter for overall loop
@@ -155,7 +151,6 @@ for b = 10:5:55
     disp(iteration);
   
     % Calculating value function using initial or previous value function
-    % WHY DOES USING sum(v.*p) CAUSE THE LOOP TO EXPLODE???
     v_next = max(w./(1 - beta), b + beta*sum(v.*p));
   
     % Storing max(abs(v - v_next)). Choosing the max so the abs vector has
@@ -212,16 +207,17 @@ for b = 10:5:55
   counter = counter + 1;
 end
 close(gcf);
-%=========================================================
+%=======
+% ANSWER
+%=======
 % We can see that the reservation wage is increasing in b.
-%=========================================================
+%===========
+% END ANSWER
+%===========
 %==========================================================================
 
 %==========================================================================
-%% Part 1c: Vary beta from 0.960 to 0.999, calculate the reservation wage,
-% and plot the policy function for different values of beta. Is the
-% reservation wage increasing or decreasing in beta?
-
+%% Part 1c: Vary beta from 0.960 to 0.999, calculate the reservation wage, and plot the policy function for different values of beta. Is the reservation wage increasing or decreasing in beta?
 % Setting up data exclusive to 1c.
 b = 20;
 
@@ -298,16 +294,17 @@ for beta = 0.960:0.013:0.999
   counter = counter + 1;
 end
 close(gcf);
-%============================================================
+%=======
+% ANSWER
+%=======
 % We can see that the reservation wage is increasing in beta.
-%============================================================
+%===========
+% END ANSWER
+%===========
 %==========================================================================
 
 %==========================================================================
-%% Part 1d: Assume that the work has a utility function of ln(Y_t) and
-% maximises his utility instead of maximising the expected discounted sum
-% of earnings. Compute the reservation wage and compare with 1a.
-
+%% Part 1d: Assume that the work has a utility function of ln(Y_t) and maximises his utility instead of maximising the expected discounted sum of earnings. Compute the reservation wage and compare with 1a.
 % Setting up data exclusive to 1d.
 b = 20;
 beta = 0.995;
@@ -365,19 +362,24 @@ title('Policy function, maximising utility ln(Y_t)');
 
 saveas(gcf, 'path\to\graphics\1d_plot.png');
 close(gcf);
-%========================================================================
+%=======
+% ANSWER
+%=======
 % When comparing with the reservation wage in part 1a, we see that the
 % reservation wage is smaller if the worker is maximising ln(Y_t) instead
 % of Y_t.
-%========================================================================
+%===========
+% END ANSWER
+%===========
 %==========================================================================
 
 %==========================================================================
-%% Part 1e: Now assume that the worker receives a job offer with
-% probability phi = 0.7 and does not receive any with probability 1 - phi =
-% 0.3. Write the Bellman equation for the worker's problem and compute the
-% reservation wage with [w_min, w_max] = [10, 60], b = 20, and beta= 0.995,
-% and plot the policy function.
+%% Part 1e: Now assume that the worker receives a job offer with probability phi = 0.7 and does not receive any with probability 1 - phi = 0.3. Write the Bellman equation for the worker's problem and compute the reservation wage with [w_min, w_max] = [10, 60], b = 20, and beta= 0.995, and plot the policy function.
+% Observe that if the worker receives no wage offer in a time period, this
+% is equivalent to saying the worker receives a wage offer of zero. In
+% other words, the lifetime utility of the worker accepting the wage offer
+% remains the same, but the lifetime utility of the worker continuing to be
+% uneployed changes.
 
 % Observe that if the worker receives no wage offer in a time period, this
 % is equivalent to saying the worker receives a wage offer of zero. In
@@ -464,10 +466,7 @@ close(gcf);
 %==========================================================================
 
 %==========================================================================
-%% Part 1f: Assume that the wage offers are distributed uniformly in
-% [w_min, w_max] = [5, 65], b = 20, and beta = 0.995. Compute the
-% reservation wage and plot the policy function.
-
+%% Part 1f: Assume that the wage offers are distributed uniformly in [w_min, w_max] = [5, 65], b = 20, and beta = 0.995. Compute the reservation wage and plot the policy function.
 % Setting up data exclusive to 1f.
 w_min = 5;
 w_max = 65;
@@ -507,7 +506,6 @@ while error >= 0.001
   disp(iteration);
   
   % Calculating value function using initial or previous value function
-  % WHY DOES USING sum(v.*p) CAUSE THE LOOP TO EXPLODE???
   v_next = max(w./(1 - beta), b + beta*sum(v.*p));
   
   % Storing max(abs(v - v_next)). Choosing the max so the abs vector has
@@ -542,12 +540,8 @@ close(gcf);
 %==========================================================================
 
 %==========================================================================
-%% Part 1g: Assume that the wage offers are distributed uniformly in
-% [w_min, w_max] = [15, 50], b = 20, and beta = 0.995. Compute the
-% reservation wage and plot the policy function.
-
+%% Part 1g: Assume that the wage offers are distributed uniformly in [w_min, w_max] = [15, 50], b = 20, and beta = 0.995. Compute the reservation wage and plot the policy function.
 % Setting up data exclusive to 1f.
-w_min = 15;
 w_max = 50;
 
 % Setting sample period
@@ -585,7 +579,6 @@ while error >= 0.001
   disp(iteration);
   
   % Calculating value function using initial or previous value function
-  % WHY DOES USING sum(v.*p) CAUSE THE LOOP TO EXPLODE???
   v_next = max(w./(1 - beta), b + beta*sum(v.*p));
   
   % Storing max(abs(v - v_next)). Choosing the max so the abs vector has

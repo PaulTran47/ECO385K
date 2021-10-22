@@ -52,9 +52,7 @@ cd(home_dir);
 %==========================================================================
 
 %==========================================================================
-%% Part 3a: Parametrise the model using Shimer's calibration. Compute the
-% wage and unemployment rate.
-
+%% Part 3a: Parametrise the model using Shimer's calibration. Compute the wage and unemployment rate.
 % Setting Shimer calibration values
 r = 0.012;
 sigma = 0.10;
@@ -76,11 +74,7 @@ w = beta*(p + c*theta) + (1 - beta)*b;
 %==========================================================================
 
 %==========================================================================
-%% Part 3bi: Consider a permanent change in sigma from 0.01 to 0.15. What
-% would the unemployment rate be if there was no change in the job-finding
-% rate for each value of sigma? Plot the unemployment rate as a function of
-% sigma for fixed job-finding rate.
-
+%% Part 3bi: Consider a permanent change in sigma from 0.01 to 0.15. What would the unemployment rate be if there was no change in the job-finding rate for each value of sigma? Plot the unemployment rate as a function of sigma for fixed job-finding rate.
 % Setting Shimer calibration values
 r = 0.012;
 sigma = 0.10;
@@ -130,11 +124,7 @@ clear urate_3bi;
 %==========================================================================
 
 %==========================================================================
-%% Part 3bii: Consider a permanent change in sigma from 0.01 to 0.15.
-% Computer the wage, theta = v/u, job-finding rate, and the unemployment
-% rate for each value of sigma. Plot the unemployment rate as a functio nof
-% sigma. Compare with the previous question.
-
+%% Part 3bii: Consider a permanent change in sigma from 0.01 to 0.15. Computer the wage, theta = v/u, job-finding rate, and the unemployment rate for each value of sigma. Plot the unemployment rate as a functio nof sigma. Compare with the previous question.
 % Setting Shimer calibration values
 r = 0.012;
 sigma = 0.10;
@@ -222,13 +212,14 @@ clear u_3bi;
 %==========================================================================
 
 %==========================================================================
-%% Part 3ci: Consider a permanent change in p by 2%. Compute the wage,
-% theta, job-finding rate, and the unemployment rate.
-
-%==========================
+%% Part 3ci: Consider a permanent change in p by 2%. Compute the wage, theta, job-finding rate, and the unemployment rate.
+%=====
+% NOTE
+%=====
 % ONLY CONSIDERING INCREASE
-%==========================
-
+%=========
+% END NOTE
+%=========
 % Setting Shimer calibration values
 r = 0.012;
 sigma = 0.10;
@@ -266,13 +257,14 @@ clear theta theta_ss lambda_w u w;
 %==========================================================================
 
 %==========================================================================
-%% Part 3cii: Consider a permanent change in p by 2%. Redo this by varying
-% beta from 0.05 to 0.80.
-
-%==========================
+%% Part 3cii: Consider a permanent change in p by 2%. Redo this by varying beta from 0.05 to 0.80.
+%=====
+% NOTE
+%=====
 % ONLY CONSIDERING INCREASE
-%==========================
-
+%=========
+% END NOTE
+%=========
 % Setting Shimer calibration values
 r = 0.012;
 sigma = 0.10;
@@ -316,17 +308,17 @@ clear counter beta theta theta_ss lambda_w u w;
 %==========================================================================
 
 %==========================================================================
-%% Part 3ciii: Consider a permanent change in p by 2%. Show how the
-% responsiveness of the unemployment rate with respect to productivity
-% changes by beta.
-
+%% Part 3ciii: Consider a permanent change in p by 2%. Show how the responsiveness of the unemployment rate with respect to productivity changes by beta.
+%=====
+% NOTE
+%=====
 % What we are essentially doing is seeing how much u changes if p increases
 % by 1% for example, for different values of beta.
 
-%==========================
 % ONLY CONSIDERING INCREASE
-%==========================
-
+%=========
+% END NOTE
+%=========
 % Setting Shimer calibration values
 r = 0.012;
 sigma = 0.10;
@@ -397,23 +389,28 @@ title({'Responsiveness of unemployment rate', 'with respect to productivity chan
 
 saveas(gcf, 'path\to\graphics\3ciii_plot.png');
 close(gcf);
-%==========================================================================
+%=======
+% ANSWER
+%=======
 % We see that keeping beta constant, a 1% increase in productivity results
 % in the equilibrium unemployment rate to decrease. However, as beta
 % increases, the magnitude of this decrease in the unemployment rate gets
 % smaller. This means the responsiveness of the unemployment rate with
 % respect to productivity changes in beta decreases.
-%==========================================================================
+%===========
+% END ANSWER
+%===========
 %==========================================================================
 
 %==========================================================================
-%% Part 3di: Consider a permanent change in p by 2%. Compute the wage,
-% theta, job-finding rate, and the unemployment rate.
-
-%==========================
+%% Part 3di: Consider a permanent change in p by 2%. Compute the wage, theta, job-finding rate, and the unemployment rate.
+%=====
+% NOTE
+%=====
 % ONLY CONSIDERING INCREASE
-%==========================
-
+%=========
+% END NOTE
+%=========
 % Setting Shimer calibration values
 r = 0.012;
 sigma = 0.10;
@@ -451,13 +448,14 @@ clear theta theta_ss lambda_w u w;
 %==========================================================================
 
 %==========================================================================
-%% Part 3dii: Consider a permanent change in p by 2%. Redo this by varying
-% b from 0.20 to 0.95.
-
-%==========================
+%% Part 3dii: Consider a permanent change in p by 2%. Redo this by varying b from 0.20 to 0.95.
+%=====
+% NOTE
+%=====
 % ONLY CONSIDERING INCREASE
-%==========================
-
+%=========
+% END NOTE
+%=========
 % Setting Shimer calibration values
 r = 0.012;
 sigma = 0.10;
@@ -501,17 +499,17 @@ clear counter b theta theta_ss lambda_w u w;
 %==========================================================================
 
 %==========================================================================
-%% Part 3diii: Consider a permanent change in p by 2%. Show how the
-% responsiveness of the unemployment rate with respect to productivity
-% changes by beta.
-
+%% Part 3diii: Consider a permanent change in p by 2%. Show how the responsiveness of the unemployment rate with respect to productivity changes by beta.
+%=====
+% NOTE
+%=====
 % What we are essentially doing is seeing how much u changes if p increases
 % by 1% for example, for different values of beta.
 
-%==========================
 % ONLY CONSIDERING INCREASE
-%==========================
-
+%=========
+% END NOTE
+%=========
 % Setting Shimer calibration values
 r = 0.012;
 sigma = 0.10;
@@ -574,11 +572,15 @@ title({'Responsiveness of unemployment rate', 'with respect to productivity chan
 
 saveas(gcf, 'path\to\graphics\3diii_plot.png');
 close(gcf);
-%==========================================================================
+%=======
+% ANSWER
+%=======
 % We see that keeping b constant, a 1% increase in productivity results in
 % the equilibrium unemployment rate to decrease. Furthermore, as b
 % increases, the magnitude of this decrease in the unemployment rate gets
 % bigger. This means the responsiveness of the unemployment rate with
 % respect to productivity increases as b increases.
-%==========================================================================
+%===========
+% END ANSWER
+%===========
 %==========================================================================
