@@ -3,7 +3,7 @@
 [MIT licensed](https://github.com/PaulTran47/ECO385K/blob/main/LICENCE.md).
 
 <details>
-  <summary>Table of Contents</summary>
+  <summary>Table of contents</summary>
   <ul>
     <li>
       <a href="#overview">Overview</a>
