@@ -26,7 +26,7 @@
 %=========
 % ECO385K Problem Set 2, 3
 % Paul Le Tran, plt377
-% 03 November, 2021
+% 04 November, 2021
 %==========================================================================
 
 %==========================================================================
@@ -160,24 +160,32 @@ F_t = F_t';
 %=====
 % NOTE
 %=====
-% We see that the value for March 2020 is negative, which doesn't make any
-% intuitive sense. This causes issues due to becoming a complex number when
-% calculating the outflow rate.
-
-% Current solution is to redefine the negative number as 0.0001.
+% Observe that the unemployment outflow probability is negative for March
+% 2020. This makes no mathematical sense due to F_t \in [0, 1]. Though this
+% doesn't affect our calculations in the sense that things break, it does
+% affect the intuitiveness of our results for this month.
 %=========
 % END NOTE
 %=========
-F_t = max(F_t, 0.0001);
 %==========================================================================
 
 %==========================================================================
 %% Part 3c: Calculate f_t = -ln(1 - F_t), where f_t is the outflow rate.
-f_t = -log(F_t);
+f_t = -log(1 - F_t);
+%=====
+% NOTE
+%=====
+% Observe that the unemployment outflow rate is negative for March 2020.
+% This makes no mathematical sense due to F_t \in [0, 1]. Though this
+% doesn't affect our calculations in the sense that things break, it does
+% affect the intuitiveness of our results for this month.
+%=========
+% END NOTE
+%=========
 %==========================================================================
 
 %==========================================================================
-%% Part 3d: Plot the outflow rate and the average duration of unemployment together for the 1996 - 2020 period.
+%% Part 3d: Plot the unemployment outflow rate and the average duration of unemployment together for the 1996 - 2020 period.
 % Changing axes colours
 left_color = [0 0 0];
 right_color = [0 0 0];
@@ -185,7 +193,7 @@ set(figure,'defaultAxesColorOrder',[left_color; right_color]);
 
 % Plotting series
 yyaxis left
-plot(dt(1:N, 1), f_t, 'LineWidth', 1.25, 'Color', [0, 0, 1]);
+plot(dt(1:N, 1), f_t*100, 'LineWidth', 1.25, 'Color', [0, 0, 1]);
 yyaxis right
 plot(dt(1:N, 1), avg_dur_u_t(1:N, 1), 'LineWidth', 1.25, 'Color', [1, 0, 0]);
 
@@ -198,10 +206,10 @@ ylabel('Weeks')
 xtickangle(45);
 
 % Creating legend
-legend('Outflow rate (Left)', 'Average Duration (Right)', 'Location', 'Northwest');
+legend('Unemployment outflow rate (Left)', 'Average Duration (Right)', 'Location', 'Northwest');
 
 % Creating title
-title('Outflow rate and average duration of unemployment');
+title({'Unemployment outflow rate and', 'average duration of unemployment'});
 
 saveas(gcf, 'path\to\graphics\3d_plot.png');
 close(gcf);
@@ -215,8 +223,7 @@ end
 clear i;
 s_t = s_t';
 
-plot(dt(1:N, 1), s_t, 'LineWidth', 1.25, 'Color', [0,0,0]);
-hold on
+plot(dt(1:N, 1), s_t*100, 'LineWidth', 1.25, 'Color', [0,0,0]);
 grid on
 xlabel('Year');
 ylabel('%');
@@ -239,11 +246,333 @@ for i = 1:length(E_t(1:N, 1))
   f(x) = U_t(i + 1, 1) == (((1 - exp(-x - f_t(i, 1)))*x)/(x + f_t(i, 1)))*L_t(i, 1) + exp(-x - f_t(i, 1))*U_t(i, 1);
   soln = double(vpasolve(f(x), x));
   s_t_direct(i, 1) = soln;
-  clear f;
+  clear f x;
 end
+s_t_direct = s_t_direct;
+
+% Plotting the unemployment inflow rates calculated in parts 3e and 3f.
+% Changing axes colours
+left_color = [0 0 0];
+right_color = [0 0 0];
+set(figure,'defaultAxesColorOrder',[left_color; right_color]);
+
+% Plotting series
+yyaxis left
+plot(dt(1:N, 1), s_t*100, 'LineWidth', 1.25, 'Color', [0, 0, 1]);
+yyaxis right
+plot(dt(1:N, 1), s_t_direct*100, 'LineWidth', 1.25, 'Color', [1, 0, 0]);
+
+% Creating axes labels
+yyaxis left
+xlabel('Year');
+ylabel('%');
+yyaxis right
+ylabel('%')
+xtickangle(45);
+
+% Creating legend
+legend('Simple unemployment inflow rate (Blue)', 'Direct unemployment inflow rate (Red)', 'Location', 'Northwest');
+
+% Creating title
+title('Unemployment inflow rate derived with different methods');
+
+saveas(gcf, 'path\to\graphics\3f_plot.png');
+close(gcf);
+%=======
+% ANSWER
+%=======
+% We see that the simple calculation for the unemployment inflow rate and
+% the calculation using the evolution of unemployment itself are very
+% similar in terms of both magnitude and curvature.
+%===========
+% END ANSWER
+%===========
 %==========================================================================
 
 %==========================================================================
 %% Part 3g: Calculate the steady-state unemployment rate for the 2000-2020 period using u_{t}^{*} = s_t/(s_t + f_t).
 u_t_SS = s_t./(s_t + f_t);
 u_t_direct_SS = s_t_direct./(s_t_direct + f_t);
+
+% Plotting SS unemployment rates derived with unemployment inflow rates
+% from parts 3e and 3f.
+% Changing axes colours
+left_color = [0 0 0];
+right_color = [0 0 0];
+set(figure,'defaultAxesColorOrder',[left_color; right_color]);
+
+% Plotting series
+plot(dt(49:N, 1), u_t_SS(49:N, 1)*100, 'LineWidth', 1.25, 'Color', [0, 0, 1]);
+hold on
+plot(dt(49:N, 1), u_t_direct_SS(49:N, 1)*100, 'LineWidth', 1.25, 'Color', [1, 0, 0]);
+
+% Creating axes labels
+xlabel('Year');
+ylabel('%');
+xtickangle(45);
+
+% Creating legend
+legend('Simple SS unemployment rate (Blue)', 'Direct SS unemployment rate (Red)', 'Location', 'Southwest');
+
+% Creating title
+title('Flow-steady-state (SS) Unemployment rate derived with different methods');
+
+saveas(gcf, 'path\to\graphics\3g_plot1.png');
+close(gcf);
+
+%=====
+% NOTE
+%=====
+% Observe that both derivations of the flow-SS unemployment rate result in
+% March 2020 to have a negative value, which does not make sense. However,
+% recall that the stock definition of unemployment rate, U_t/L_t is closely
+% approximated to the flow-SS value. It is for this close relationship that
+% I make the call to replace the March 2020 flow-SS value with the
+% approximated stock value.
+%=========
+% END NOTE
+%=========
+u_t_stock = U_t./L_t;
+u_t_SS(291, 1) = u_t_stock(291, 1);
+u_t_direct_SS(291, 1) = u_t_stock(291, 1);
+
+
+% Plotting SS unemployment rates derived with unemployment inflow rates
+% from parts 3e and 3f, and from using the stock-derived value for March
+% 2020.
+% Changing axes colours
+left_color = [0 0 0];
+set(figure,'defaultAxesColorOrder',[left_color; right_color]);
+
+% Plotting series
+plot(dt(49:N, 1), u_t_SS(49:N, 1)*100, 'LineWidth', 1.25, 'Color', [0, 0, 1]);
+hold on
+plot(dt(49:N, 1), u_t_direct_SS(49:N, 1)*100, 'LineWidth', 1.25, 'Color', [1, 0, 0]);
+
+% Creating axes labels
+xlabel('Year');
+ylabel('%');
+xtickangle(45);
+
+% Setting y-axis interval
+set(gca, 'ylim', [3, 15]);
+set(gca, 'ytick', 3:1:15);
+
+% Creating legend
+legend('Simple flow-SS unemployment rate (Blue)', 'Direct flow-SS unemployment rate (Red)', 'Location', 'Northwest');
+
+% Creating title
+title({'Flow-steady-state (SS) unemployment rate', 'derived with different methods.', 'Note: The March 2020 value is replaced with the', 'corresponding value from the stock unemployment rate'});
+
+saveas(gcf, 'path\to\graphics\3g_plot2.png');
+close(gcf);
+%==========================================================================
+
+%==========================================================================
+%% Part 3h: Now assume that s_t is fixed at its mean value for the sample and f_t varies over time. Calculate the counterfactual unemployment rate for the 1996 - 2020 period.
+% Calculating mean value of s_t and s_t_direct
+avg_s_t = mean(s_t);
+avg_s_t_direct = mean(s_t_direct);
+
+% Calculating unemployment rates
+u_t_avg_s_t_SS = avg_s_t./(avg_s_t + f_t);
+u_t_avg_s_t_direct_SS = avg_s_t_direct./(avg_s_t_direct + f_t);
+
+%=====
+% NOTE
+%=====
+% Observe that both derivations of the flow-SS unemployment rate result in
+% March 2020 to have a negative value, which does not make sense. However,
+% recall that the stock definition of unemployment rate, U_t/L_t is closely
+% approximated to the flow-SS value. It is for this close relationship that
+% I make the call to replace the March 2020 flow-SS value with the
+% approximated stock value.
+%=========
+% END NOTE
+%=========
+u_t_avg_s_t_SS(291, 1) = u_t_stock(291, 1);
+u_t_avg_s_t_direct_SS(291, 1) = u_t_stock(291, 1);
+
+% Plotting SS unemployment rates derived with mean of unemployment inflow
+% rates from parts 3e and 3f, and from using the stock-derived value for
+% March 2020.
+% Changing axes colours
+left_color = [0 0 0];
+set(figure,'defaultAxesColorOrder',[left_color; right_color]);
+
+% Plotting series
+plot(dt(49:N, 1), u_t_avg_s_t_SS(49:N, 1)*100, 'LineWidth', 1.25, 'Color', [0, 0, 1]);
+hold on
+plot(dt(49:N, 1), u_t_avg_s_t_direct_SS(49:N, 1)*100, 'LineWidth', 1.25, 'Color', [1, 0, 0]);
+
+% Creating axes labels
+xlabel('Year');
+ylabel('%');
+xtickangle(45);
+
+% Setting y-axis interval
+set(gca, 'ylim', [3, 15]);
+set(gca, 'ytick', 3:1:15);
+
+% Creating legend
+legend('Simple flow-SS unemployment rate (Blue)', 'Direct flow-SS unemployment rate (Red)', 'Location', 'Northwest');
+
+% Creating title
+title({'Flow-steady-state (SS) unemployment rate', 'derived with different methods.', 'Note 1: The March 2020 value is replaced with the', 'corresponding value from the stock unemployment rate', 'Note 2: Using the sample average for both inflow rate measures.'});
+
+saveas(gcf, 'path\to\graphics\3h_plot.png');
+close(gcf);
+%==========================================================================
+
+%==========================================================================
+%% Part 3i: Part 3h: Now assume that f_t is fixed at its mean value for the sample and s_t varies over time. Calculate the counterfactual unemployment rate for the 1996 - 2020 period.
+% Calculating mean value of f_t
+avg_f_t = mean(f_t);
+
+% Calculating unemployment rates
+u_t_avg_f_t_SS = s_t./(s_t + avg_f_t);
+u_t_avg_f_t_direct_SS = s_t_direct./(s_t_direct + avg_f_t);
+
+%=====
+% NOTE
+%=====
+% Observe that both derivations of the flow-SS unemployment rate result in
+% March 2020 to have a negative value, which does not make sense. However,
+% recall that the stock definition of unemployment rate, U_t/L_t is closely
+% approximated to the flow-SS value. It is for this close relationship that
+% I make the call to replace the March 2020 flow-SS value with the
+% approximated stock value.
+%=========
+% END NOTE
+%=========
+u_t_avg_f_t_SS(291, 1) = u_t_stock(291, 1);
+u_t_avg_f_t_direct_SS(291, 1) = u_t_stock(291, 1);
+
+% Plotting SS unemployment rates derived with mean of unemployment outflow
+% rate from part 3c, from unemployment inflow rates from parts 3e and 3f,
+% and from using the stock-derived value for March 2020.
+% Changing axes colours
+left_color = [0 0 0];
+set(figure,'defaultAxesColorOrder',[left_color; right_color]);
+
+% Plotting series
+plot(dt(49:N, 1), u_t_avg_f_t_SS(49:N, 1)*100, 'LineWidth', 1.25, 'Color', [0, 0, 1]);
+hold on
+plot(dt(49:N, 1), u_t_avg_f_t_direct_SS(49:N, 1)*100, 'LineWidth', 1.25, 'Color', [1, 0, 0]);
+
+% Creating axes labels
+xlabel('Year');
+ylabel('%');
+xtickangle(45);
+
+% Setting y-axis interval
+set(gca, 'ylim', [3, 15]);
+set(gca, 'ytick', 3:1:15);
+
+% Creating legend
+legend('Simple flow-SS unemployment rate (Blue)', 'Direct flow-SS unemployment rate (Red)', 'Location', 'Northwest');
+
+% Creating title
+title({'Flow-steady-state (SS) unemployment rate', 'derived with different methods.', 'Note 1: The March 2020 value is replaced with the', 'corresponding value from the stock unemployment rate', 'Note 2: Using the sample average for outflow rate measure.'});
+
+saveas(gcf, 'path\to\graphics\3i_plot.png');
+close(gcf);
+%==========================================================================
+
+%==========================================================================
+%% Part 3j: Which margin is more important for unemployment rate fluctuations?
+%=======
+% ANSWER
+%=======
+% When comparing the charts produced in parts 3h and 3i, we see that much
+% of the observed cyclicality of the unemployment rate is closely matched
+% with the countercyclical unemployment rate calculated with varying
+% outflow rate and mean inflow rate. As a result, the unemployment outflow
+% rate seems to be more important in determining unemployment rate
+% fluctuations.
+%===========
+% END ANSWER
+%===========
+%==========================================================================
+
+%==========================================================================
+%% Part 3k: Apply the decomposition in Elsby, Hobijn, and Sahin (2010) to the COVID-19 recession.
+% The decomposition here is equation (6) in the mentioned paper:
+
+% \Delta u_t \approx \beta_{t - 1}*(\Delta ln(s_t) - \Delta ln(f_t)),
+
+% where \beta_{t - 1} = u_{t - 1}(1 - u_{t - 1})
+
+% Calculating \beta_{t - 1} and the difference in the natural logs of s_t,
+% s_t_direct, and f_t
+%=====
+% NOTE
+%=====
+% Because there is a negative value for f_t in March 2020, we will force it
+% to be a value of 0.0001 for computation's sake.
+%=========
+% END NOTE
+%=========
+beta = u_t_SS.*(1 - u_t_SS);
+ln_s_t = log(s_t);
+ln_s_t_direct = log(s_t_direct);
+ln_f_t = log(max(f_t, 0.0001));
+ln_s_t_diff = diff(ln_s_t);
+ln_s_t_direct_diff = diff(ln_s_t_direct);
+ln_f_t_diff = diff(ln_f_t);
+
+% Multiplying \beta_{t - 1} with the log-differences_t
+for i = 2:N-1
+  rhs_s_t(i, 1) = beta(i - 1, 1)*ln_s_t_diff(i, 1);
+  rhs_s_t_direct(i, 1) = beta(i - 1, 1)*ln_s_t_direct_diff(i, 1);
+  rhs_f_t(i, 1) = beta(i - 1, 1)*ln_f_t_diff(i, 1);
+end
+
+% Plotting rhs_s_t and rhs_f_t for January 2020 - July 2020.
+% Changing axes colours
+left_color = [0 0 0];
+set(figure,'defaultAxesColorOrder',[left_color; right_color]);
+
+% Plotting series
+plot(dt(289:length(rhs_f_t), 1), rhs_s_t(289:length(rhs_f_t), 1)*100, 'LineWidth', 1.25, 'Color', [0, 0, 1]);
+hold on
+plot(dt(289:length(rhs_f_t), 1), rhs_f_t(289:length(rhs_f_t), 1)*100, 'LineWidth', 1.25, 'Color', [1, 0, 0]);
+
+% Creating axes labels
+xlabel('Month');
+ylabel('Log points');
+xtickangle(45);
+
+% Creating legend
+legend('\beta_{t - 1}\Deltaln(s_t) (Left)', '\beta_{t - 1}\Deltaln(f_t) (Right)', 'Location', 'Northeast');
+
+% Creating title
+title({'Log change in unemployment inflow and outflow rates', 'the COVID-19 recession', 'Note: Using the simple-derived inflow rate measure'});
+
+saveas(gcf, 'path\to\graphics\3k_plot1.png');
+close(gcf);
+
+% Plotting rhs_s_t_direct and rhs_f_t for January 2020 - July 2020.
+% Changing axes colours
+left_color = [0 0 0];
+set(figure,'defaultAxesColorOrder',[left_color; right_color]);
+
+% Plotting series
+plot(dt(289:length(rhs_f_t), 1), rhs_s_t_direct(289:length(rhs_f_t), 1)*100, 'LineWidth', 1.25, 'Color', [0, 0, 1]);
+hold on
+plot(dt(289:length(rhs_f_t), 1), rhs_f_t(289:length(rhs_f_t), 1)*100, 'LineWidth', 1.25, 'Color', [1, 0, 0]);
+
+% Creating axes labels
+xlabel('Month');
+ylabel('Log points');
+xtickangle(45);
+
+% Creating legend
+legend('\beta_{t - 1}\Deltaln(s_t) (Left)', '\beta_{t - 1}\Deltaln(f_t) (Right)', 'Location', 'Northeast');
+
+% Creating title
+title({'Log change in unemployment inflow and outflow rates during', 'the COVID-19 recession', 'Note: Using the direct-derived inflow rate measure'});
+
+saveas(gcf, 'path\to\graphics\3k_plot2.png');
+close(gcf);
+%==========================================================================
