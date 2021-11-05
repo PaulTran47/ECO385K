@@ -16,44 +16,36 @@
   </ul>
 </details>
 
-=========================================================================
+---
 
 ## Overview
-=========================================================================
-
 This repository houses all problem sets and associated solutions for ECO385K: Advanced Macro Labour I at UT Austin, in fall 2021. The solutions are written in Matlab by Paul Le Tran.
 
 <p align="right">
   (<a href="#ut-austin-advanced-macro-labour-i">back to top.</a>)
 </p>
 
-=========================================================================
+---
 
 ### Problem set 1
-=========================================================================
-
 Basic McCall matching model Bellman equation iteration; investigating relationship between unemployment rate and average duration of unemployment; basic Mortensen-Pissarides matching model with exogenous separation.
 
 <p align="right">
   (<a href="#ut-austin-advanced-macro-labour-i">back to top.</a>)
 </p>
 
-=========================================================================
+---
 
 ### Problem set 2
-=========================================================================
-
 Two-state unemployment flows model.
 
 <p align="right">
   (<a href="#ut-austin-advanced-macro-labour-i">back to top.</a>)
 </p>
 
-=========================================================================
+---
 
 ## Prerequisites
-=========================================================================
-
 * Latest version of Matlab.
 * Matlab packages include:
   * [Symbolic Math Toolbox](https://www.mathworks.com/help/symbolic/);
@@ -66,4 +58,4 @@ Two-state unemployment flows model.
   (<a href="#ut-austin-advanced-macro-labour-i">back to top.</a>)
 </p>
 
-=========================================================================
+---
