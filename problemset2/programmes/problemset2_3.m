@@ -26,7 +26,7 @@
 %=========
 % ECO385K Problem Set 2, 3
 % Paul Le Tran, plt377
-% 04 November, 2021
+% 08 November, 2021
 %==========================================================================
 
 %==========================================================================
@@ -167,6 +167,34 @@ F_t = F_t';
 %=========
 % END NOTE
 %=========
+
+% Creating zero line
+zeroline = zeros(length(dt(1:N, 1)),1);
+
+% Changing axes colours
+left_color = [0 0 0];
+right_color = [0 0 0];
+set(figure,'defaultAxesColorOrder',[left_color; right_color]);
+
+% Plotting series
+plot(dt(1:N, 1), F_t, 'LineWidth', 1.25, 'Color', [0, 0, 0]);
+hold on
+plot(dt(1:N, 1), zeroline, 'LineWidth', 1, 'Color', [0, 0, 0]);
+
+% Creating axes labels
+xlabel('Year');
+ylabel('Probability');
+xtickangle(45);
+
+% Setting y-axis interval
+set(gca, 'ylim', [-0.4, 1]);
+set(gca, 'ytick', -0.4:0.2:1);
+
+% Creating title
+title({'Unemployment outflow probability'});
+
+saveas(gcf, 'path\to\graphics\3b_plot.png');
+close(gcf);
 %==========================================================================
 
 %==========================================================================
@@ -191,7 +219,12 @@ left_color = [0 0 0];
 right_color = [0 0 0];
 set(figure,'defaultAxesColorOrder',[left_color; right_color]);
 
+% Creating zero line
+zeroline = zeros(length(dt(1:N, 1)),1);
+
 % Plotting series
+plot(dt(1:N, 1), zeroline, 'LineWidth', 1, 'Color', [0, 0, 0]);
+hold on
 yyaxis left
 plot(dt(1:N, 1), f_t*100, 'LineWidth', 1.25, 'Color', [0, 0, 1]);
 yyaxis right
@@ -206,7 +239,7 @@ ylabel('Weeks')
 xtickangle(45);
 
 % Creating legend
-legend('Unemployment outflow rate (Left)', 'Average Duration (Right)', 'Location', 'Northwest');
+legend('', 'Unemployment outflow rate (Left)', 'Average Duration (Right)', 'Location', 'Southwest');
 
 % Creating title
 title({'Unemployment outflow rate and', 'average duration of unemployment'});
@@ -223,7 +256,12 @@ end
 clear i;
 s_t = s_t';
 
-plot(dt(1:N, 1), s_t*100, 'LineWidth', 1.25, 'Color', [0,0,0]);
+% Creating zero line
+zeroline = zeros(length(dt(1:N, 1)),1);
+
+plot(dt(1:N, 1), s_t*100, 'LineWidth', 1.25, 'Color', [0, 0, 0]);
+hold on
+plot(dt(1:N, 1), zeroline, 'LineWidth', 1, 'Color', [0, 0, 0]);
 grid on
 xlabel('Year');
 ylabel('%');
@@ -256,22 +294,23 @@ left_color = [0 0 0];
 right_color = [0 0 0];
 set(figure,'defaultAxesColorOrder',[left_color; right_color]);
 
+% Creating zero line
+zeroline = zeros(length(dt(1:N, 1)),1);
+
 % Plotting series
-yyaxis left
+plot(dt(1:N, 1), zeroline, 'LineWidth', 1, 'Color', [0, 0, 0]);
+hold on
 plot(dt(1:N, 1), s_t*100, 'LineWidth', 1.25, 'Color', [0, 0, 1]);
-yyaxis right
+hold on
 plot(dt(1:N, 1), s_t_direct*100, 'LineWidth', 1.25, 'Color', [1, 0, 0]);
 
 % Creating axes labels
-yyaxis left
 xlabel('Year');
 ylabel('%');
-yyaxis right
-ylabel('%')
 xtickangle(45);
 
 % Creating legend
-legend('Simple unemployment inflow rate (Blue)', 'Direct unemployment inflow rate (Red)', 'Location', 'Northwest');
+legend('', 'Simple unemployment inflow rate (Blue)', 'Direct unemployment inflow rate (Red)', 'Location', 'Northwest');
 
 % Creating title
 title('Unemployment inflow rate derived with different methods');
@@ -290,7 +329,7 @@ close(gcf);
 %==========================================================================
 
 %==========================================================================
-%% Part 3g: Calculate the steady-state unemployment rate for the 2000-2020 period using u_{t}^{*} = s_t/(s_t + f_t).
+%% Part 3g: Calculate the steady-state unemployment rate for the 1996-2020 period using u_{t}^{*} = s_t/(s_t + f_t).
 u_t_SS = s_t./(s_t + f_t);
 u_t_direct_SS = s_t_direct./(s_t_direct + f_t);
 
@@ -301,10 +340,15 @@ left_color = [0 0 0];
 right_color = [0 0 0];
 set(figure,'defaultAxesColorOrder',[left_color; right_color]);
 
+% Creating zero line
+zeroline = zeros(length(dt(1:N, 1)),1);
+
 % Plotting series
-plot(dt(49:N, 1), u_t_SS(49:N, 1)*100, 'LineWidth', 1.25, 'Color', [0, 0, 1]);
+plot(dt(1:N, 1), zeroline, 'LineWidth', 1, 'Color', [0, 0, 0]);
 hold on
-plot(dt(49:N, 1), u_t_direct_SS(49:N, 1)*100, 'LineWidth', 1.25, 'Color', [1, 0, 0]);
+plot(dt(1:N, 1), u_t_SS(1:N, 1)*100, 'LineWidth', 1.25, 'Color', [0, 0, 1]);
+hold on
+plot(dt(1:N, 1), u_t_direct_SS(1:N, 1)*100, 'LineWidth', 1.25, 'Color', [1, 0, 0]);
 
 % Creating axes labels
 xlabel('Year');
@@ -312,7 +356,7 @@ ylabel('%');
 xtickangle(45);
 
 % Creating legend
-legend('Simple SS unemployment rate (Blue)', 'Direct SS unemployment rate (Red)', 'Location', 'Southwest');
+legend('', 'Simple SS unemployment rate (Blue)', 'Direct SS unemployment rate (Red)', 'Location', 'Southwest');
 
 % Creating title
 title('Flow-steady-state (SS) Unemployment rate derived with different methods');
@@ -344,10 +388,15 @@ u_t_direct_SS(291, 1) = u_t_stock(291, 1);
 left_color = [0 0 0];
 set(figure,'defaultAxesColorOrder',[left_color; right_color]);
 
+% Creating zero line
+zeroline = zeros(length(dt(1:N, 1)),1);
+
 % Plotting series
-plot(dt(49:N, 1), u_t_SS(49:N, 1)*100, 'LineWidth', 1.25, 'Color', [0, 0, 1]);
+plot(dt(1:N, 1), zeroline, 'LineWidth', 1, 'Color', [0, 0, 0]);
 hold on
-plot(dt(49:N, 1), u_t_direct_SS(49:N, 1)*100, 'LineWidth', 1.25, 'Color', [1, 0, 0]);
+plot(dt(1:N, 1), u_t_SS(1:N, 1)*100, 'LineWidth', 1.25, 'Color', [0, 0, 1]);
+hold on
+plot(dt(1:N, 1), u_t_direct_SS(1:N, 1)*100, 'LineWidth', 1.25, 'Color', [1, 0, 0]);
 
 % Creating axes labels
 xlabel('Year');
@@ -359,7 +408,7 @@ set(gca, 'ylim', [3, 15]);
 set(gca, 'ytick', 3:1:15);
 
 % Creating legend
-legend('Simple flow-SS unemployment rate (Blue)', 'Direct flow-SS unemployment rate (Red)', 'Location', 'Northwest');
+legend('', 'Simple flow-SS unemployment rate (Blue)', 'Direct flow-SS unemployment rate (Red)', 'Location', 'Northwest');
 
 % Creating title
 title({'Flow-steady-state (SS) unemployment rate', 'derived with different methods.', 'Note: The March 2020 value is replaced with the', 'corresponding value from the stock unemployment rate'});
@@ -400,10 +449,15 @@ u_t_avg_s_t_direct_SS(291, 1) = u_t_stock(291, 1);
 left_color = [0 0 0];
 set(figure,'defaultAxesColorOrder',[left_color; right_color]);
 
+% Creating zero line
+zeroline = zeros(length(dt(1:N, 1)),1);
+
 % Plotting series
-plot(dt(49:N, 1), u_t_avg_s_t_SS(49:N, 1)*100, 'LineWidth', 1.25, 'Color', [0, 0, 1]);
+plot(dt(1:N, 1), zeroline, 'LineWidth', 1, 'Color', [0, 0, 0]);
 hold on
-plot(dt(49:N, 1), u_t_avg_s_t_direct_SS(49:N, 1)*100, 'LineWidth', 1.25, 'Color', [1, 0, 0]);
+plot(dt(1:N, 1), u_t_avg_s_t_SS(1:N, 1)*100, 'LineWidth', 1.25, 'Color', [0, 0, 1]);
+hold on
+plot(dt(1:N, 1), u_t_avg_s_t_direct_SS(1:N, 1)*100, 'LineWidth', 1.25, 'Color', [1, 0, 0]);
 
 % Creating axes labels
 xlabel('Year');
@@ -415,7 +469,7 @@ set(gca, 'ylim', [3, 15]);
 set(gca, 'ytick', 3:1:15);
 
 % Creating legend
-legend('Simple flow-SS unemployment rate (Blue)', 'Direct flow-SS unemployment rate (Red)', 'Location', 'Northwest');
+legend('', 'Simple flow-SS unemployment rate (Blue)', 'Direct flow-SS unemployment rate (Red)', 'Location', 'Northwest');
 
 % Creating title
 title({'Flow-steady-state (SS) unemployment rate', 'derived with different methods.', 'Note 1: The March 2020 value is replaced with the', 'corresponding value from the stock unemployment rate', 'Note 2: Using the sample average for both inflow rate measures.'});
@@ -455,10 +509,15 @@ u_t_avg_f_t_direct_SS(291, 1) = u_t_stock(291, 1);
 left_color = [0 0 0];
 set(figure,'defaultAxesColorOrder',[left_color; right_color]);
 
+% Creating zero line
+zeroline = zeros(length(dt(1:N, 1)),1);
+
 % Plotting series
-plot(dt(49:N, 1), u_t_avg_f_t_SS(49:N, 1)*100, 'LineWidth', 1.25, 'Color', [0, 0, 1]);
+plot(dt(1:N, 1), zeroline, 'LineWidth', 1, 'Color', [0, 0, 0]);
 hold on
-plot(dt(49:N, 1), u_t_avg_f_t_direct_SS(49:N, 1)*100, 'LineWidth', 1.25, 'Color', [1, 0, 0]);
+plot(dt(1:N, 1), u_t_avg_f_t_SS(1:N, 1)*100, 'LineWidth', 1.25, 'Color', [0, 0, 1]);
+hold on
+plot(dt(1:N, 1), u_t_avg_f_t_direct_SS(1:N, 1)*100, 'LineWidth', 1.25, 'Color', [1, 0, 0]);
 
 % Creating axes labels
 xlabel('Year');
@@ -470,7 +529,7 @@ set(gca, 'ylim', [3, 15]);
 set(gca, 'ytick', 3:1:15);
 
 % Creating legend
-legend('Simple flow-SS unemployment rate (Blue)', 'Direct flow-SS unemployment rate (Red)', 'Location', 'Northwest');
+legend('', 'Simple flow-SS unemployment rate (Blue)', 'Direct flow-SS unemployment rate (Red)', 'Location', 'Northwest');
 
 % Creating title
 title({'Flow-steady-state (SS) unemployment rate', 'derived with different methods.', 'Note 1: The March 2020 value is replaced with the', 'corresponding value from the stock unemployment rate', 'Note 2: Using the sample average for outflow rate measure.'});
@@ -486,7 +545,7 @@ close(gcf);
 %=======
 % When comparing the charts produced in parts 3h and 3i, we see that much
 % of the observed cyclicality of the unemployment rate is closely matched
-% with the countercyclical unemployment rate calculated with varying
+% with the counterfactual unemployment rate calculated with varying
 % outflow rate and mean inflow rate. As a result, the unemployment outflow
 % rate seems to be more important in determining unemployment rate
 % fluctuations.
@@ -533,7 +592,12 @@ end
 left_color = [0 0 0];
 set(figure,'defaultAxesColorOrder',[left_color; right_color]);
 
+% Creating zero line
+zeroline = zeros(length(dt(1:N, 1)),1);
+
 % Plotting series
+plot(dt(289:length(rhs_f_t), 1), zeroline(289:length(rhs_f_t), 1), 'LineWidth', 1, 'Color', [0, 0, 0]);
+hold on
 plot(dt(289:length(rhs_f_t), 1), rhs_s_t(289:length(rhs_f_t), 1)*100, 'LineWidth', 1.25, 'Color', [0, 0, 1]);
 hold on
 plot(dt(289:length(rhs_f_t), 1), rhs_f_t(289:length(rhs_f_t), 1)*100, 'LineWidth', 1.25, 'Color', [1, 0, 0]);
@@ -544,10 +608,10 @@ ylabel('Log points');
 xtickangle(45);
 
 % Creating legend
-legend('\beta_{t - 1}\Deltaln(s_t) (Left)', '\beta_{t - 1}\Deltaln(f_t) (Right)', 'Location', 'Northeast');
+legend('', '\beta_{t - 1}\Deltaln(s_t) (Left)', '\beta_{t - 1}\Deltaln(f_t) (Right)', 'Location', 'Northeast');
 
 % Creating title
-title({'Log change in unemployment inflow and outflow rates', 'the COVID-19 recession', 'Note: Using the simple-derived inflow rate measure'});
+title({'', 'Log change in unemployment inflow and outflow rates', 'the COVID-19 recession', 'Note: Using the simple-derived inflow rate measure'});
 
 saveas(gcf, 'path\to\graphics\3k_plot1.png');
 close(gcf);
@@ -557,7 +621,12 @@ close(gcf);
 left_color = [0 0 0];
 set(figure,'defaultAxesColorOrder',[left_color; right_color]);
 
+% Creating zero line
+zeroline = zeros(length(dt(1:N, 1)),1);
+
 % Plotting series
+plot(dt(289:length(rhs_f_t), 1), zeroline(289:length(rhs_f_t), 1), 'LineWidth', 1, 'Color', [0, 0, 0]);
+hold on
 plot(dt(289:length(rhs_f_t), 1), rhs_s_t_direct(289:length(rhs_f_t), 1)*100, 'LineWidth', 1.25, 'Color', [0, 0, 1]);
 hold on
 plot(dt(289:length(rhs_f_t), 1), rhs_f_t(289:length(rhs_f_t), 1)*100, 'LineWidth', 1.25, 'Color', [1, 0, 0]);
@@ -568,7 +637,7 @@ ylabel('Log points');
 xtickangle(45);
 
 % Creating legend
-legend('\beta_{t - 1}\Deltaln(s_t) (Left)', '\beta_{t - 1}\Deltaln(f_t) (Right)', 'Location', 'Northeast');
+legend('', '\beta_{t - 1}\Deltaln(s_t) (Left)', '\beta_{t - 1}\Deltaln(f_t) (Right)', 'Location', 'Northeast');
 
 % Creating title
 title({'Log change in unemployment inflow and outflow rates during', 'the COVID-19 recession', 'Note: Using the direct-derived inflow rate measure'});
