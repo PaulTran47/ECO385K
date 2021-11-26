@@ -133,7 +133,7 @@ dt = avgduru{:, 1};
 
 % Creating scalar representing total number of months/length of vectors
 % Because the outflow probability is one month short by Shimer's
-% calculation (seen in part 3b), we will set this scalar as such.
+% calculation (seen in part 1b), we will set this scalar as such.
 global N;
 N = length(E_t) - 1;
 
@@ -152,7 +152,7 @@ clear avgduru E_lvl U_lvl Ul5w;
 % END NOTE
 %=========
 cd(home_dir);
-for i = 1:length(E_t)-1
+for i = 1:N
   F_t(i) = 1 - (U_t(i + 1, 1) - U_l5w_t(i + 1, 1))/U_t(i, 1);
 end
 clear i;
