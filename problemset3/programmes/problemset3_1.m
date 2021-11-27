@@ -218,7 +218,6 @@ close(gcf);
 %==========================================================================
 %% Part 1e: Calculate the unemployment inflow rate using the actual evolution of the unmployment over time, by solving for s_t directly.
 % The evolution of unemployment is as follows:
-
 % U_{t + 1} = (((1 - exp(-s_t - f_t))*s_t)/(s_t + f_t))*L_t + exp(-s_t - f_t)*U_t.
 for i = 1:length(E_t(1:N, 1))
   syms f(x);
@@ -227,6 +226,7 @@ for i = 1:length(E_t(1:N, 1))
   s_t(i, 1) = soln;
   clear f x;
 end
+clear i;
 s_t = s_t;
 
 % Plotting the unemployment inflow rates calculated in parts 3e and 3f.

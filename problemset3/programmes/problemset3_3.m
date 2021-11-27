@@ -136,7 +136,7 @@ jolts_hires_tnf = joltshirestnf{:, 2};
 global N;
 N = length(U_t) - 1;
 
-clear U_lvl Ul5w joltsvactnf;
+clear U_lvl Ul5w joltsvactnf joltshirestnf;
 %==========================================================================
 
 %==========================================================================
