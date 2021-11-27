@@ -10,6 +10,7 @@
       <ol>
         <li><a href="#problem-set-1">Problem set 1</a></li>
         <li><a href="#problem-set-2">Problem set 2</a></li>
+        <li><a href="#problem-set-3">Problem set 3</a></li>
       </ol>
     </li>
     <li><a href="#prerequisites">Prerequisites</a></li>
@@ -27,7 +28,7 @@ This repository houses all problem sets and associated solutions for ECO385K: Ad
 
 ---
 
-### Problem set 1
+### [Problem set 1](https://github.com/PaulTran47/ECO385K/tree/main/problemset1)
 Basic McCall matching model Bellman equation iteration; investigating relationship between unemployment rate and average duration of unemployment; basic Mortensen-Pissarides matching model with exogenous separation.
 
 <p align="right">
@@ -36,8 +37,17 @@ Basic McCall matching model Bellman equation iteration; investigating relationsh
 
 ---
 
-### Problem set 2
+### [Problem set 2](https://github.com/PaulTran47/ECO385K/tree/main/problemset2)
 Two-state unemployment flows model.
+
+<p align="right">
+  (<a href="#ut-austin-advanced-macro-labour-i">back to top.</a>)
+</p>
+
+---
+
+### [Problem set 3](https://github.com/PaulTran47/ECO385K/tree/main/problemset3)
+Mismatch unemployment
 
 <p align="right">
   (<a href="#ut-austin-advanced-macro-labour-i">back to top.</a>)
