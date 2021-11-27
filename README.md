@@ -47,7 +47,7 @@ Two-state unemployment flows model.
 ---
 
 ### [Problem set 3](https://github.com/PaulTran47/ECO385K/tree/main/problemset3)
-Mismatch unemployment
+Mismatch unemployment.
 
 <p align="right">
   (<a href="#ut-austin-advanced-macro-labour-i">back to top.</a>)
