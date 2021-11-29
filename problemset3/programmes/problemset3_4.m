@@ -866,7 +866,7 @@ close(gcf);
 %=======
 % Our plot of the calculated simple mismatch index shows that whilst some
 % elevated spikes occurred in the early 2000s and around 2008, the index
-% dramatically increased and reached its maximum between 2009 - 2010.It
+% dramatically increased and reached its maximum between 2009 - 2010. It
 % would only return to pre-Great-recession levels around 2011, where it
 % would continue to decrease around 2014.
 %===========

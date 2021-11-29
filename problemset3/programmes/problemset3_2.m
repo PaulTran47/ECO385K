@@ -1287,7 +1287,7 @@ set(gca, 'ytick', 0:0.05:0.3);
 legend('Construction', 'Manufacturing - Durables', 'Finance', 'Retail', 'Health', '', 'Location', 'Northwest');
 
 % Creating title
-title({'Unemployment shares by selected industry', 'as in Sahin et al. (2014)'});
+title({'Vacancy shares by selected industry', 'as in Sahin et al. (2014)'});
 
 saveas(gcf, 'path\to\graphics\2f_plot_vacshare.png');
 close(gcf);

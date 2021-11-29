@@ -284,8 +284,10 @@ clear left_color right_color htut_fitted_aii mdl_aii regressor y;
 % period, we first observe that the size of the gap between the two series
 % is smaller in terms of absolute magnitude compared to the gap between the
 % predicted v. actual job-finding rate done in part 3ai. Furthermore, we
-% see that there actual exists no gap between 2008 and the beginning of
-% 2010.
+% see that there actually exists no gap between 2008 and the beginning of
+% 2010. Finally, we note that the actual job-finding rate was consistently
+% above the fitted counterpart prior to the Great recession, but switched
+% places around 2010 and onwards.
 %===========
 % END ANSWER
 %===========

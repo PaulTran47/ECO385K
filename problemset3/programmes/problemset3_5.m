@@ -1301,7 +1301,7 @@ ratio = (ht_star - h_t)./ht_star;
 % matching function as a result of change in mismatch, also captures the
 % deviation of actual hires to the optimal hiring amount. In other words,
 % one can state that this alternative mismatch index is much better at
-% capturing information than our simple index in part 4.
+% capturing information than our simple index in problem 4.
 %===========
 % END ANSWER
 %===========
